@@ -5,20 +5,25 @@ def get_book_text(file_path):
 
 	return file_innards
 
-def count_words(content):
-
-	book_list = content.split()
-	count = 0
-
-	for i in range(0, len(book_list)):
-		count += 1
-
-	return count
+from stats import count_words, count_characters, sorted_characters
 
 
 def main():
-	count = count_words(get_book_text("books/frankenstein.txt"))
-	print("Found " + str(count) + " total words")
+    text = get_book_text("books/frankenstein.txt")
 
+    print("============ BOOKBOT ============")
+    print("Analyzing book found at books/frankenstein.txt...")
+
+    count = count_words(text)
+    print("----------- Word Count ----------")
+    print("Found " + str(count) + " total words")
+
+    dict_chars = count_characters(text)
+    sorted_list = sorted_characters(dict_chars)
+
+    print("--------- Character Count -------")
+    for item in sorted_list:
+        print(f"{item['char']}: {item['num']}")
+    print("============= END ===============")
 
 main()
